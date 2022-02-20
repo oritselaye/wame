@@ -25,6 +25,8 @@ func main() {
 	  port = "8080"
 	} // this was for simple deployment on heroku
 
+    fs := http.FileServer(http.Dir("public"))
+    http.Handle("/public/", http.StripPrefix("/public/", fs))
     http.HandleFunc("/", wame)
     http.HandleFunc("/walink", walink)
     http.ListenAndServe(":"+port, nil)
